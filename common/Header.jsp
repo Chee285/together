@@ -16,12 +16,12 @@
             font-weight: normal;
             font-style: normal;
         }
-        html,body,*{padding: 0;margin: 0; box-sizing: border-box; font-family: 'BMJUA'; font-weight: 500;}
+        html,body,*{padding: 0;margin: 0; box-sizing: border-box; font-weight: 500;}
         a{display: block; text-decoration: none!important;}
         ul{list-style: none;}
 
 
-        header{width: 100%; height: 140px; transition:all 1s;}
+        header{width: 100%; height: 140px; transition:all 1s; font-family: 'BMJUA';}
         .header {width: 100%; height: 80px; padding: 20px 0 10px;}
         .header > .logo_login { height: 60px; display: flex; justify-content: space-between; align-items: center;  padding: 0 60px 0 }
         .header > .logo_login > .logout_munu {display: none; width:200px; justify-content: space-between; align-items: center;}
@@ -46,11 +46,11 @@
         .line1 {top: 18px;}
         .line4 {top: 32px;}
 
-        .ham_btn.on {background-color: #ffb500;transition: all 1s;}
-        .on .line2 {top: -10; transform: rotate(405deg); width: 20px; left: 15px; background-color: #fff;}
-        .on .line3 {top: -10; transform: rotate(135deg); width: 20px; left: 15px; background-color: #fff;}
-        .on .line1 {top: -50px; transform: rotate(360deg); background-color: #fff;}
-        .on .line4 {top: 50px; transform: rotate(-360deg); background-color: #fff;}
+        .ham_btn.on {background-color:#E3E41A; transition: all 1s;}
+        .line2.on {top: -10; transform: rotate(405deg); width: 20px; left: 15px; background-color: #005ad5;}
+        .line3.on {top: -10; transform: rotate(135deg); width: 20px; left: 15px; background-color: #005ad5;}
+        .line1.on {top: -50px; transform: rotate(360deg); background-color: #fff;}
+        .line4.on {top: 50px; transform: rotate(-360deg); background-color: #fff;}
 
 
 
@@ -74,6 +74,11 @@
         
         .m_nav .nav_bar.active{height: 300px; opacity: 1; transition:all 1s;}
         header.active{height: 420px; transition:all 1s;}
+
+
+        /* btn click */
+        .pc_nav ul li a.on{background-color: rgb(213, 224, 230); color: rgb(15, 82, 87); }
+
 
 
 
