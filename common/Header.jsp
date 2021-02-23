@@ -21,21 +21,22 @@
         ul{list-style: none;}
 
 
-        header{width: 100%; height: 120px; transition:all 1s;}
-        .header {width: 100%; height: 60px;}
-        .header > .logo_login {display: flex; justify-content: space-between; align-items: center;  padding: 0 60px 0 30px;}
-        .header > .logo_login > .login_menu {display: none; width:200px; justify-content: space-between; align-items: center;}
-        .header > .logo_login > .logout_menu {width: 400px; display: flex; justify-content: space-around; align-items: center;}
+        header{width: 100%; height: 140px; transition:all 1s;}
+        .header {width: 100%; height: 80px; padding: 20px 0 10px;}
+        .header > .logo_login { height: 60px; display: flex; justify-content: space-between; align-items: center;  padding: 0 60px 0 }
+        .header > .logo_login > .logout_munu {display: none; width:200px; justify-content: space-between; align-items: center;}
+        .header > .logo_login > .login_menu {width: 400px; display: flex; justify-content: space-around; align-items: center;}
 
-        .logout_menu > .coin_box {width: 160px; height: 30px; border-radius: 10px; background-color: #ddd; display: flex; align-items: center; justify-content: space-around;}
-        .logout_menu > .coin_box > img {width: 20px;height: 20px; vertical-align: top;} 
+        .login_menu > .coin_box {width: auto; padding: 10px; height: 30px; border-radius: 10px; background-color: #ddd; display: flex; align-items: center; justify-content: space-around;}
+        .login_menu > .coin_box > img {width: 20px;height: 20px; vertical-align: top;} 
+        .login_menu > .coin_box > .coin_num {margin: 0 5px;}
 
         /* nav */
-        .pc_nav{width: 95%; height: 60px; border-radius: 10px; background-color:  rgb(52, 152, 219); margin: 0 auto;}
+        .pc_nav{width: 95%; height: 60px; border-radius: 10px; overflow: hidden; background-color:  rgb(52, 152, 219); margin: 0 auto;}
         .pc_nav ul{display: flex; align-items: center;}
-        .pc_nav ul li{width: 150px; height: auto;}
-        .pc_nav ul li a{width: 100%; height: auto; text-align: center; line-height: 60px; color: #fff;}
-        .pc_nav ul li a:hover{background-color: beige; color: black; font-weight: bold;}
+        .pc_nav ul li{width: 150px; height: auto; } 
+        .pc_nav ul li a{width: 100%; height: auto; text-align: center; line-height: 60px; color: #fff; font-size: 20px;}
+        .pc_nav ul li a:hover{background-color: rgb(213, 224, 230); color: rgb(15, 82, 87); }
 
 
 
@@ -62,8 +63,8 @@
         .m_nav .nav_bar ul{display: flex; flex-flow: column; align-items: flex-start; width: 100%; }
 
         .m_nav .nav_item {width: 100%; }
-        .m_nav .nav_item a.nav_link{width: 100%; text-align: left; height: 60px; line-height: 60px; padding-left: 50px;  opacity: 1; color: #fff;}
-        .m_nav .nav_item a.nav_link:hover{background-color: rgb(106, 175, 230); color: #000; }
+        .m_nav .nav_item a.nav_link{width: 100%; text-align: left; height: 60px; line-height: 60px; padding-left: 50px;  opacity: 1; color: rgb(0, 0, 0); border-bottom: 1px solid rgba(145, 145, 145, 0.514);}
+        .m_nav .nav_item a.nav_link:hover{background-color: rgb(106, 175, 230); color: rgb(255, 255, 255); }
         
         
         
