@@ -6,10 +6,7 @@
     
     <!-- 제이쿼리 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- 부트스트렙 css -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <!-- 부트스트렙 js -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+   
     <title>투게더</title>
     <style>
         @font-face {
@@ -75,40 +72,43 @@
 
         .col a:hover {background-color: #fff; color: #000; font-weight: bold;}
 
+        footer{height: auto;}
+        footer > .footer_wrap {display: flex;height: 300px;  align-items: center; justify-content: space-around;}
 
+        
+
+        footer .footer_contents{display: flex; flex-flow: column; justify-content: space-around;}
+        footer .footer_content1{height: 250px;}
+        footer .footer_content2{width: 350px; height: 250px;}
+        footer .footer_content3{width: 150px;}
+
+        
 
         
         /* 반응형 */
         @media screen and (max-width: 991px) {
 
             /* footer */
-            footer {font-size: 14px;}
-            .social-inner{font-size: 11px;}
+            footer {font-size: 10px;}
+
+            footer > .footer_wrap{flex-flow: column;justify-content: space-between; align-items: flex-start; height: 600px; padding: 60px;}
+            footer .footer_contents{margin: 20px 0;}
+            
         }
     </style>
-    <script>
-        $(function(){
+  
 
-
-
-
-        });
-    </script>
-    
 </head>
 <body>
     <!-- footer -->
-    <footer class="section footer-classic context-dark bg-image" style="background: rgb(106, 175, 230);">
-        <div class="container">
-            <div class="row row-30">
-            <div class="col-md-4 col-xl-5">
-                <div class="pr-xl-4">
+    <footer class="footer-classic context-dark" style="background: rgb(106, 175, 230);">
+        <div class="footer_wrap">
+            <div class="footer_content1 footer_contents">
                 <p>머라고 써야 할지 모르겠습니다... 도와주세요...</p>
                 <!-- Rights-->
                 <p class="rights"><span>©  </span><span class="copyright-year">2021</span><span> </span><span>Together</span><span>. </span><span>Team project</span></p>
-                </div>
             </div>
-            <div class="col-md-4">
+            <div class="footer_content2 footer_contents">
                 <h5>Contacts</h5>
                 <dl class="contact-list">
                 <dt>Address:</dt>
@@ -124,7 +124,7 @@
                 </dd>
                 </dl>
             </div>
-            <div class="col-md-4 col-xl-3">
+            <div class="footer_content3 footer_contents">
                 <h5>Team</h5>
                 <ul class="nav-list">
                 <li><a href="#">PM : 박아란</a></li>
@@ -133,7 +133,6 @@
                 <li><a href="#">TM : 온수인</a></li>
                 <li><a href="#">TM : 이소영</a></li>
                 </ul>
-            </div>
             </div>
         </div>
         

@@ -20,6 +20,8 @@
         a{display: block; text-decoration: none!important;}
         ul{list-style: none;}
 
+
+        header{width: 100%; height: 120px; transition:all 1s;}
         .header {width: 100%; height: 60px;}
         .header > .logo_login {display: flex; justify-content: space-between; align-items: center;  padding: 0 60px 0 30px;}
         .header > .logo_login > .login_menu {display: none; width:200px; justify-content: space-between; align-items: center;}
@@ -56,11 +58,11 @@
 
         .m_nav .nav_head{display: flex; justify-content: space-between; align-items: center; padding: 10px; background-color: rgb(52, 152, 219);}
 
-        .m_nav .nav_bar {width: 100%; height: 0; opacity: 0; transition:all 1s; overflow: hidden;}
+        .m_nav .nav_bar {width: 100%; height: 0; opacity: 0; transition:all 1s; overflow: hidden; z-index: 1000; }
         .m_nav .nav_bar ul{display: flex; flex-flow: column; align-items: flex-start; width: 100%; }
 
         .m_nav .nav_item {width: 100%; }
-        .m_nav .nav_item a.nav_link{width: 100%; text-align: left; height: 60px; line-height: 60px; padding-left: 50px;  opacity: 1; }
+        .m_nav .nav_item a.nav_link{width: 100%; text-align: left; height: 60px; line-height: 60px; padding-left: 50px;  opacity: 1; color: #fff;}
         .m_nav .nav_item a.nav_link:hover{background-color: rgb(106, 175, 230); color: #000; }
         
         
@@ -70,7 +72,7 @@
         /* nav_toggle */
         
         .m_nav .nav_bar.active{height: 300px; opacity: 1; transition:all 1s;}
-
+        header.active{height: 420px; transition:all 1s;}
 
 
 
@@ -84,6 +86,7 @@
             .m_nav{display: block;}
             .pc_nav{display: none;}
 
+
             
         }
 
@@ -96,9 +99,7 @@
 
         
         $(function(){
-
-           
-               
+    
 
             //햄버거 메뉴
             $(".ham_btn").on("click",function(){
@@ -106,10 +107,10 @@
                 $(this).toggleClass("on");
 
                 $(".nav_bar").toggleClass("active");
+                $("header").toggleClass("active");
                 
                 
             });
-           
             
 
 
