@@ -23,14 +23,34 @@ public class Together_Info {
 //   private int category_no;
    private Category category_no;
    private String member_id;
-   private String toget_name;
-   private String how_confirm;
+   private String together_name;
    private String confirmCnt;
    private int applicationFee;
    private String togetherImg;
    private String togetherIntro;
    private Date upload_date;
    private char status;
+   private String pho_good;
+   private String pho_bad;
+   
+public String getTogether_name() {
+	return together_name;
+}
+public void setTogether_name(String together_name) {
+	this.together_name = together_name;
+}
+public String getPho_good() {
+	return pho_good;
+}
+public void setPho_good(String pho_good) {
+	this.pho_good = pho_good;
+}
+public String getPho_bad() {
+	return pho_bad;
+}
+public void setPho_bad(String pho_bad) {
+	this.pho_bad = pho_bad;
+}
 public int getTogether_info() {
 	return together_info;
 }
@@ -49,18 +69,7 @@ public String getMember_id() {
 public void setMember_id(String member_id) {
 	this.member_id = member_id;
 }
-public String getToget_name() {
-	return toget_name;
-}
-public void setToget_name(String toget_name) {
-	this.toget_name = toget_name;
-}
-public String getHow_confirm() {
-	return how_confirm;
-}
-public void setHow_confirm(String how_confirm) {
-	this.how_confirm = how_confirm;
-}
+
 public String getConfirmCnt() {
 	return confirmCnt;
 }

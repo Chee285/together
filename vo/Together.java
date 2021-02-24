@@ -25,6 +25,22 @@ public class Together {
    private Date start_date;
    private Date end_date;
    private int status;
+   private String tog_confirm_cnt;
+   private int tog_sub_cnt;
+   
+   
+public String getTog_confirm_cnt() {
+	return tog_confirm_cnt;
+}
+public void setTog_confirm_cnt(String tog_confirm_cnt) {
+	this.tog_confirm_cnt = tog_confirm_cnt;
+}
+public int getTog_sub_cnt() {
+	return tog_sub_cnt;
+}
+public void setTog_sub_cnt(int tog_sub_cnt) {
+	this.tog_sub_cnt = tog_sub_cnt;
+}
 public String getTogether_no() {
 	return together_no;
 }
