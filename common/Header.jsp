@@ -65,6 +65,8 @@
         .m_nav .nav_item {width: 100%; }
         .m_nav .nav_item a.nav_link{width: 100%; text-align: left; height: 60px; line-height: 60px; padding-left: 50px;  opacity: 1; color: rgb(0, 0, 0); border-bottom: 1px solid rgba(145, 145, 145, 0.514);}
         .m_nav .nav_item a.nav_link:hover{background-color: rgb(106, 175, 230); color: rgb(255, 255, 255); }
+
+        .m_nav .logo img{max-width: 35vw;}
         
         
         
@@ -86,7 +88,7 @@
         /* 반응형 */
         @media screen and (max-width: 991px) {
 
-           
+            header{height: 70px;}
             /* 모바일 nav */
             .header{display: none;}
             .m_nav{display: block;}

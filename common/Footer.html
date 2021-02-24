@@ -21,7 +21,7 @@
 
 
         /* footer */
-        .context-dark, .bg-gray-dark, .bg-primary {color: rgba(255, 255, 255, 0.8); font-family: 'Noto Sans KR', sans-serif;}
+        .context-dark, .bg-gray-dark, .bg-primary {color: rgba(255, 255, 255, 0.8); font-family: 'Noto Sans KR', sans-serif; font-size: 12px;}
 
         .footer-classic a, .footer-classic a:focus, .footer-classic a:active {
             color: #ffffff;
@@ -78,17 +78,17 @@
 
         footer .footer_contents{display: flex; flex-flow: column; justify-content: space-around;}
         footer .footer_content1{height: 250px;}
-        footer .footer_content2{width: 350px; height: 250px;}
+        footer .footer_content2{max-width: 350px; height: 250px;}
         footer .footer_content3{width: 150px;}
 
         
 
         
         /* 반응형 */
-        @media screen and (max-width: 991px) {
+        @media screen and (max-width: 760px) {
 
             /* footer */
-            footer {font-size: 10px;}
+            .context-dark, .bg-gray-dark, .bg-primary {font-size: 10px;}
 
             footer > .footer_wrap{flex-flow: column;justify-content: space-between; align-items: flex-start; height: 600px; padding: 60px;}
             footer .footer_contents{margin: 20px 0;}
