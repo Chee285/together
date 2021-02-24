@@ -1,6 +1,7 @@
 package vo;
 
 import java.sql.Date;
+import java.util.List;
  
 public class Photo_Shoot {
 	
@@ -19,20 +20,73 @@ public class Photo_Shoot {
 	
 	
 	private int photo_no;
-	private String member_id;
-//	private Member member;
+//	private String member_id;
+	private Member member;
 	private String together_no;
-//	private Together together;
+	private Together together;
 	private String photo_good;
 	private String impression;
 	private int like_cnt;
 	private int status;
 	private Date date;
+	public int getPhoto_no() {
+		return photo_no;
+	}
+	public void setPhoto_no(int photo_no) {
+		this.photo_no = photo_no;
+	}
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
+	}
+	public String getTogether_no() {
+		return together_no;
+	}
+	public void setTogether_no(String together_no) {
+		this.together_no = together_no;
+	}
+	public Together getTogether() {
+		return together;
+	}
+	public void setTogether(Together together) {
+		this.together = together;
+	}
+	public String getPhoto_good() {
+		return photo_good;
+	}
+	public void setPhoto_good(String photo_good) {
+		this.photo_good = photo_good;
+	}
+	public String getImpression() {
+		return impression;
+	}
+	public void setImpression(String impression) {
+		this.impression = impression;
+	}
+	public int getLike_cnt() {
+		return like_cnt;
+	}
+	public void setLike_cnt(int like_cnt) {
+		this.like_cnt = like_cnt;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
 	
 	
 
 
-	
 	
 }
 

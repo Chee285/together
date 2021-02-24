@@ -25,6 +25,54 @@ public class Together {
    private Date start_date;
    private Date end_date;
    private int status;
+public String getTogether_no() {
+	return together_no;
+}
+public void setTogether_no(String together_no) {
+	this.together_no = together_no;
+}
+public Together_Info getTogether_info() {
+	return together_info;
+}
+public void setTogether_info(Together_Info together_info) {
+	this.together_info = together_info;
+}
+public int getVersion() {
+	return version;
+}
+public void setVersion(int version) {
+	this.version = version;
+}
+public int getSum() {
+	return sum;
+}
+public void setSum(int sum) {
+	this.sum = sum;
+}
+public int getPeople() {
+	return people;
+}
+public void setPeople(int people) {
+	this.people = people;
+}
+public Date getStart_date() {
+	return start_date;
+}
+public void setStart_date(Date start_date) {
+	this.start_date = start_date;
+}
+public Date getEnd_date() {
+	return end_date;
+}
+public void setEnd_date(Date end_date) {
+	this.end_date = end_date;
+}
+public int getStatus() {
+	return status;
+}
+public void setStatus(int status) {
+	this.status = status;
+}
    
    
   

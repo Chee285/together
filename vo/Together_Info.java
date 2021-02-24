@@ -31,6 +31,72 @@ public class Together_Info {
    private String togetherIntro;
    private Date upload_date;
    private char status;
+public int getTogether_info() {
+	return together_info;
+}
+public void setTogether_info(int together_info) {
+	this.together_info = together_info;
+}
+public Category getCategory_no() {
+	return category_no;
+}
+public void setCategory_no(Category category_no) {
+	this.category_no = category_no;
+}
+public String getMember_id() {
+	return member_id;
+}
+public void setMember_id(String member_id) {
+	this.member_id = member_id;
+}
+public String getToget_name() {
+	return toget_name;
+}
+public void setToget_name(String toget_name) {
+	this.toget_name = toget_name;
+}
+public String getHow_confirm() {
+	return how_confirm;
+}
+public void setHow_confirm(String how_confirm) {
+	this.how_confirm = how_confirm;
+}
+public String getConfirmCnt() {
+	return confirmCnt;
+}
+public void setConfirmCnt(String confirmCnt) {
+	this.confirmCnt = confirmCnt;
+}
+public int getApplicationFee() {
+	return applicationFee;
+}
+public void setApplicationFee(int applicationFee) {
+	this.applicationFee = applicationFee;
+}
+public String getTogetherImg() {
+	return togetherImg;
+}
+public void setTogetherImg(String togetherImg) {
+	this.togetherImg = togetherImg;
+}
+public String getTogetherIntro() {
+	return togetherIntro;
+}
+public void setTogetherIntro(String togetherIntro) {
+	this.togetherIntro = togetherIntro;
+}
+public Date getUpload_date() {
+	return upload_date;
+}
+public void setUpload_date(Date upload_date) {
+	this.upload_date = upload_date;
+}
+public char getStatus() {
+	return status;
+}
+public void setStatus(char status) {
+	this.status = status;
+}
    
    
  
