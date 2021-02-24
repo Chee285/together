@@ -88,7 +88,7 @@
         /* 반응형 */
         @media screen and (max-width: 991px) {
 
-           
+            header{height: 70px;}
             /* 모바일 nav */
             .header{display: none;}
             .m_nav{display: block;}
