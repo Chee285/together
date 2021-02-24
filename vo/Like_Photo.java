@@ -1,28 +1,28 @@
 package vo;
 
 public class Like_Photo {
-	
+
 	/*
-		 	MEMBER_ID	VARCHAR2(20 BYTE)	Yes
-			PHOTO_NO	NUMBER(4,0)			Yes
+	 * MEMBER_ID VARCHAR2(20 BYTE) Yes PHOTO_NO NUMBER(4,0) Yes
 	 */
-	
-	
-	private String member_id;
-//	private String photo_no;
-	private Photo_Shoot photo;
-	public String getMember_id() {
-		return member_id;
+
+	private String mem_id;
+	private Photo_Shoot pho_no;
+
+	public String getMem_id() {
+		return mem_id;
 	}
-	public void setMember_id(String member_id) {
-		this.member_id = member_id;
+
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
 	}
-	public Photo_Shoot getPhoto() {
-		return photo;
+
+	public Photo_Shoot getPho_no() {
+		return pho_no;
 	}
-	public void setPhoto(Photo_Shoot photo) {
-		this.photo = photo;
+
+	public void setPho_no(Photo_Shoot pho_no) {
+		this.pho_no = pho_no;
 	}
-	
-	
+
 }

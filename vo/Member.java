@@ -3,108 +3,111 @@ package vo;
 import java.sql.Date;
 import java.util.List;
 
+public class Member {
 
-public class Member{
-	
 	/*
-	 	MEMBER_ID		VARCHAR2(20 BYTE)	No
-		MEMBER_PWD		VARCHAR2(30 BYTE)	No
-		NAME			VARCHAR2(15 BYTE)	No
-		BIRTHDAY		DATE				Yes
-		NICKNAME		VARCHAR2(30 BYTE)	No
-		PHONE_NUM		VARCHAR2(11 BYTE)	No
-		BALANCE			NUMBER(7,0)			Yes
-		PROFILE_IMG		VARCHAR2(100 BYTE)	Yes
-		STATUS_MESSAGE	VARCHAR2(100 BYTE)	Yes
-		STATUS			NUMBER(1,0)			Yes
+	 * MEMBER_ID VARCHAR2(20 BYTE) No MEMBER_PWD VARCHAR2(30 BYTE) No NAME
+	 * VARCHAR2(15 BYTE) No BIRTHDAY DATE Yes NICKNAME VARCHAR2(30 BYTE) No
+	 * PHONE_NUM VARCHAR2(11 BYTE) No BALANCE NUMBER(7,0) Yes PROFILE_IMG
+	 * VARCHAR2(100 BYTE) Yes STATUS_MESSAGE VARCHAR2(100 BYTE) Yes STATUS
+	 * NUMBER(1,0) Yes
 	 */
-	
-	
-	
-	
-	
-	private String member_id; //아이디
-	private String member_pwd; //비밀번호
-	private String name; //이름
-	private Date birthday; //생년월일
-	private String nickname; //별명
-	private String phonme_num; // 휴대폰번호
-	private int balance; // 포인트
-	private String profile_img; // 프로필 사진
-	private String status_message; // 상태 메세지
-	private int status; // 상태
-	public String getMember_id() {
-		return member_id;
-	}
-	public void setMember_id(String member_id) {
-		this.member_id = member_id;
-	}
-	public String getMember_pwd() {
-		return member_pwd;
-	}
-	public void setMember_pwd(String member_pwd) {
-		this.member_pwd = member_pwd;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public Date getBirthday() {
-		return birthday;
-	}
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-	public String getPhonme_num() {
-		return phonme_num;
-	}
-	public void setPhonme_num(String phonme_num) {
-		this.phonme_num = phonme_num;
-	}
-	public int getBalance() {
-		return balance;
-	}
-	public void setBalance(int balance) {
-		this.balance = balance;
-	}
-	public String getProfile_img() {
-		return profile_img;
-	}
-	public void setProfile_img(String profile_img) {
-		this.profile_img = profile_img;
-	}
-	public String getStatus_message() {
-		return status_message;
-	}
-	public void setStatus_message(String status_message) {
-		this.status_message = status_message;
-	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	
-	
 
 	// 인증모아보기
 	// 카테고리로 검색가능 이름으로도 검색가능 챌린지 이름으로도 검색가능
-//	public Category category;
-//	public Together_Info together_info;
-//	public Photo_Shoot photo_shoot;
+//   public Category category;
+//   public Together_Info together_info;
+//   public Photo_Shoot photo_shoot;
 
-	
-	
-	
-	
-	
+	private String mem_id; // 아이디
+	private String mem_pwd; // 비밀번호
+	private String mem_name; // 이름
+	private Date mem_birthday; // 생년월일
+	private String mem_nickname; // 별명
+	private String mem_phonme_num; // 휴대폰번호
+	private int mem_balance; // 포인트
+	private String mem_profile_img; // 프로필 사진
+	private String mem_status_message; // 상태 메세지
+	private int mem_status; // 상태
+
+	public String getMem_id() {
+		return mem_id;
+	}
+
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
+	}
+
+	public String getMem_pwd() {
+		return mem_pwd;
+	}
+
+	public void setMem_pwd(String mem_pwd) {
+		this.mem_pwd = mem_pwd;
+	}
+
+	public String getMem_name() {
+		return mem_name;
+	}
+
+	public void setMem_name(String mem_name) {
+		this.mem_name = mem_name;
+	}
+
+	public Date getMem_birthday() {
+		return mem_birthday;
+	}
+
+	public void setMem_birthday(Date mem_birthday) {
+		this.mem_birthday = mem_birthday;
+	}
+
+	public String getMem_nickname() {
+		return mem_nickname;
+	}
+
+	public void setMem_nickname(String mem_nickname) {
+		this.mem_nickname = mem_nickname;
+	}
+
+	public String getMem_phonme_num() {
+		return mem_phonme_num;
+	}
+
+	public void setMem_phonme_num(String mem_phonme_num) {
+		this.mem_phonme_num = mem_phonme_num;
+	}
+
+	public int getMem_balance() {
+		return mem_balance;
+	}
+
+	public void setMem_balance(int mem_balance) {
+		this.mem_balance = mem_balance;
+	}
+
+	public String getMem_profile_img() {
+		return mem_profile_img;
+	}
+
+	public void setMem_profile_img(String mem_profile_img) {
+		this.mem_profile_img = mem_profile_img;
+	}
+
+	public String getMem_status_message() {
+		return mem_status_message;
+	}
+
+	public void setMem_status_message(String mem_status_message) {
+		this.mem_status_message = mem_status_message;
+	}
+
+	public int getMem_status() {
+		return mem_status;
+	}
+
+	public void setMem_status(int mem_status) {
+		this.mem_status = mem_status;
+	}
+
 }
