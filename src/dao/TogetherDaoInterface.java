@@ -28,7 +28,7 @@ public interface TogetherDaoInterface {
 	 * @return Together t
 	 * @throws FindException
 	 */
-	public Together togetherDetail(String together_info)throws FindException;
+	public Together togetherDetail(String together_info, int info_no)throws FindException;
 	
 	// 인증모아보기
 	/**
@@ -37,7 +37,7 @@ public interface TogetherDaoInterface {
 	 * @thorws FindException
 	 */
 	
-	public Sign_Together photoCollection()throws FindException;
+	public List<Photo_Shoot> photoCollection()throws FindException;
 	
 	// 결재
 	// 남은 잔액 반환
@@ -98,7 +98,7 @@ public interface TogetherDaoInterface {
 	 * @return 이미했으면 :1 / 하지 않았으면 :0
 	 * @throws FindException
 	 */
-	public int checkPS(Date day, String id, String together_no) throws FindException;
+	public int checkPS(String day, String id, String together_no) throws FindException;
 
 	// 투게더 이름 검색
 	/**
@@ -127,4 +127,10 @@ public interface TogetherDaoInterface {
 	 */
 	public List<Photo_Shoot> id_vw(String id) throws FindException;
 
+	
+	public List<Together> together_version(int info_no) throws FindException;
+	
+	public void together_insert_version(int info_no,String start, String end, int certified, int sub_certified) throws AddException;
+	
+	public List<Photo_Shoot> searchPhoto(String option, String content) throws FindException;
 }

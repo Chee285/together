@@ -22,13 +22,19 @@ public class Member {
 	private String mem_id; // 아이디
 	private String mem_pwd; // 비밀번호
 	private String mem_name; // 이름
-	private Date mem_birthday; // 생년월일
+	private String mem_birthday; // 생년월일
 	private String mem_nickname; // 별명
 	private String mem_phonme_num; // 휴대폰번호
 	private int mem_balance; // 포인트
 	private String mem_profile_img; // 프로필 사진
 	private String mem_status_message; // 상태 메세지
 	private int mem_status; // 상태
+
+	public Member(String mem_profile_img, String mem_nickname) {
+		this.mem_profile_img = mem_profile_img;
+		this.mem_nickname = mem_nickname;
+		
+	}
 
 	public String getMem_id() {
 		return mem_id;
@@ -54,11 +60,11 @@ public class Member {
 		this.mem_name = mem_name;
 	}
 
-	public Date getMem_birthday() {
+	public String getMem_birthday() {
 		return mem_birthday;
 	}
 
-	public void setMem_birthday(Date mem_birthday) {
+	public void setMem_birthday(String mem_birthday) {
 		this.mem_birthday = mem_birthday;
 	}
 

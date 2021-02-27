@@ -13,15 +13,24 @@ public class Photo_Shoot {
 	 */
 
 	private int pho_no;
-	private String mem_id;
-//   private Member member;
+//	private String mem_id;
+   private Member member;
 	private String tog_no;
 	private Together together;
 	private String pho_good;
 	private String pho_impression;
 	private int pho_like_cnt;
 	private int pho_status;
-	private Date pho_upload_date;
+	private String pho_upload_date;
+
+	public Photo_Shoot(Member m, Together info, String pho_good, String pho_impression, int pho_like_cnt, String pho_upload_date) {
+		this.member = m;
+		this.together = info;
+		this.pho_good = pho_good;
+		this.pho_impression = pho_impression;
+		this.pho_like_cnt = pho_like_cnt;
+		this.pho_upload_date =pho_upload_date;
+	}
 
 	public Together getTogether() {
 		return together;
@@ -37,14 +46,6 @@ public class Photo_Shoot {
 
 	public void setPho_no(int pho_no) {
 		this.pho_no = pho_no;
-	}
-
-	public String getMem_id() {
-		return mem_id;
-	}
-
-	public void setMem_id(String mem_id) {
-		this.mem_id = mem_id;
 	}
 
 	public String getTog_no() {
@@ -87,11 +88,20 @@ public class Photo_Shoot {
 		this.pho_status = pho_status;
 	}
 
-	public Date getPho_upload_date() {
+	public String getPho_upload_date() {
 		return pho_upload_date;
 	}
 
-	public void setPho_upload_date(Date pho_upload_date) {
+	public void setPho_upload_date(String pho_upload_date) {
 		this.pho_upload_date = pho_upload_date;
 	}
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+	
 }

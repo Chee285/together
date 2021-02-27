@@ -19,10 +19,29 @@ public class Together_Info {
 	private int info_application_fee;
 	private String info_img;
 	private String info_intro;
-	private Date info_uplocad_date;
-	private char info_status;
+	private String info_uplocad_date;
+	private int info_status;
 	private String pho_good;
 	private String pho_bad;
+
+	
+	
+	public Together_Info(int info_no,String info_name, String info_how_confirm, String info_img, String info_intro, String pho_good,
+			String pho_bad) {
+		super();
+		this.info_no = info_no;
+		this.info_name = info_name;
+		this.info_how_confirm = info_how_confirm;
+		this.info_img = info_img;
+		this.info_intro = info_intro;
+		this.pho_good = pho_good;
+		this.pho_bad = pho_bad;
+	}
+	
+	public Together_Info(String info_name){
+		this.info_name=info_name;
+	}
+	
 
 	public int getInfo_no() {
 		return info_no;
@@ -88,19 +107,19 @@ public class Together_Info {
 		this.info_intro = info_intro;
 	}
 
-	public Date getInfo_uplocad_date() {
+	public String getInfo_uplocad_date() {
 		return info_uplocad_date;
 	}
 
-	public void setInfo_uplocad_date(Date info_uplocad_date) {
+	public void setInfo_uplocad_date(String info_uplocad_date) {
 		this.info_uplocad_date = info_uplocad_date;
 	}
 
-	public char getInfo_status() {
+	public int getInfo_status() {
 		return info_status;
 	}
 
-	public void setInfo_status(char info_status) {
+	public void setInfo_status(int info_status) {
 		this.info_status = info_status;
 	}
 

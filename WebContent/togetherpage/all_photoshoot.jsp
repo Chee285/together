@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+`<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,6 +17,89 @@
         $(function(){
             $("header").load("../common/Header.html");
             $("footer").load("../common/Footer.html");
+           
+       
+            
+            // 인증샷 모아보기 로드시 실행하여 모든 인증샷을 가져옵니다.
+            $.ajax({
+            	url:"../allphoshoot",
+            	method:"get",
+            	dataType:"json",
+            	success:function(data){
+            		// 카드 만들어줄 예정입니다.
+            		console.log(data);
+            		
+            		var card ="";
+            		$(data).each(function(index, element){
+            			
+            			card += " <div class='col-md-4'> <div class='card mb-4'>";
+            			card += "<div><img src='.."+element.mem_profile_img +"' class='pro_img' alt='회원 프로필사진'>";
+            			card +=	element.mem_nickname +"</div>";
+            			card += "<img class='card-img-top' src='.."+element.pho_good+"' alt='인증샷이미지'>";
+            			card += "<div class='card-body'>";
+            			card += "<h5 class ='card-title'>"+element.info_name+"</h5>";
+            			card +="<p class='card-text'>"+element.pho_impression+"</p>";
+            			card += "<div class='row'>";
+            			card += "<div class='col'> 좋아</div>";
+            			card += "<div class='col-6'>" + element.pho_like_cnt +"</div>";
+            			card += "<div class='col'>"+element.pho_upload_date+"</div></div></div></div></div>";
+
+            		});
+            		
+            		
+            		$("#cardCollection").append(card);
+            		
+            	},error:function(error){
+            		alert(error.status);
+            	}
+            });
+            
+            
+            // 검색 관련 ajax
+            $("#searchButton").click(function(){
+            	var $selectOption = $("#exampleFormControlSelect1 option:selected").val(); // option
+            	var $searchBar = $("#searchBar").val(); // 내용
+            	
+            	// 닉네임, 투게더 이름, 카테고리 구분해야한다.
+            	$.ajax({
+            		url:"../photosearch",
+            		method:"get",
+            		dataType:"json",
+            		data : {option : $selectOption ,content: $searchBar},
+            		success:function(data){
+            			console.log(data);
+            			
+            			var card ="";
+                		$(data).each(function(index, element){
+                			
+                			card += " <div class='col-md-4'> <div class='card mb-4'>";
+                			card += "<div><img src='.."+element.mem_profile_img +"' class='pro_img' alt='회원 프로필사진'>";
+                			card +=	element.mem_nickname +"</div>";
+                			card += "<img class='card-img-top' src='.."+element.pho_good+"' alt='인증샷이미지'>";
+                			card += "<div class='card-body'>";
+                			card += "<h5 class ='card-title'>"+element.info_name+"</h5>";
+                			card +="<p class='card-text'>"+element.pho_impression+"</p>";
+                			card += "<div class='row'>";
+                			card += "<div class='col'> 좋아</div>";
+                			card += "<div class='col-6'>" + element.pho_like_cnt +"</div>";
+                			card += "<div class='col'>"+element.pho_upload_date+"</div></div></div></div></div>";
+
+                		});
+                		
+                		
+                		$("#cardCollection").append(card);
+            		},error: function(error){
+            			console.log(error.status);
+            		}
+            	});
+            	// 검색 부분 만들어라
+            	$("#cardCollection").empty();
+            	
+            	
+            	return false;
+            });
+            
+           
         });
     </script>
     <title>Hello World!</title>
@@ -58,7 +141,7 @@
         <form class="form-inline my-2 my-lg-0">
         	<div class="row" style="width:100%;">
         		<div class="col-6" style="padding-left:0; padding-right:0;" >
-            		<input class="form-control mr-sm-2 search_bar" type="search" placeholder="Search" aria-label="Search" style="width:100%; padding-left:0; padding-right:0;">
+            		<input id="searchBar"class="form-control mr-sm-2 search_bar" type="search" placeholder="Search" aria-label="Search" style="width:100%; padding-left:0; padding-right:0;">
             		
             	</div>
             <!-- option select -->
@@ -74,179 +157,12 @@
             </div>
 
             <div  class="col-2" style=" padding-left:0; padding-right:0;">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="width:100%; padding-left:0; padding-right:0;">검색</button>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="width:100%; padding-left:0; padding-right:0;" id="searchButton">검색</button>
             </div>
             </div>
         </form>
 
-        <div class="row">
-            
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div><img src="../image/test.png" class="pro_img"> 닉네임</div>
-
-                    <img class="card-img-top" src="../image/test.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">TOGETER 인증모아보기</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <div class="row">
-                            <div class="col">좋아요</div>
-                            <div class="col-6">좋아요 수</div>
-                            <div class="col">날짜</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div><img src="../image/test.png" class="pro_img"> 닉네임</div>
-
-                    <img class="card-img-top" src="../image/test.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <div class="row">
-                            <div class="col">좋아요</div>
-                            <div class="col-6">좋아요 수</div>
-                            <div class="col">날짜</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div><img src="../image/test.png" class="pro_img"> 닉네임</div>
-
-                    <img class="card-img-top" src="../image/test.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <div class="row">
-                            <div class="col">좋아요</div>
-                            <div class="col-6">좋아요 수</div>
-                            <div class="col">날짜</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div><img src="../image/test.png" class="pro_img"> 닉네임</div>
-
-                    <img class="card-img-top" src="../image/test.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <div class="row">
-                            <div class="col">좋아요</div>
-                            <div class="col-6">좋아요 수</div>
-                            <div class="col">날짜</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div><img src="../image/test.png" class="pro_img"> 닉네임</div>
-
-                    <img class="card-img-top" src="../image/test.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <div class="row">
-                            <div class="col"><img src="../image/like.png" style="width:30px"></div>
-                            <div class="col-6">좋아요 수</div>
-                            <div class="col">날짜</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div><img src="../image/test.png" class="pro_img"> 닉네임</div>
-
-                    <img class="card-img-top" src="../image/test.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <div class="row">
-                            <div class="col">좋아요</div>
-                            <div class="col-6">좋아요 수</div>
-                            <div class="col">날짜</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div><img src="../image/test.png" class="pro_img"> 닉네임</div>
-
-                    <img class="card-img-top" src="../image/test.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <div class="row">
-                            <div class="col">좋아요</div>
-                            <div class="col-6">좋아요 수</div>
-                            <div class="col">날짜</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div><img src="../image/test.png" class="pro_img"> 닉네임</div>
-
-                    <img class="card-img-top" src="../image/test.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <div class="row">
-                            <div class="col">좋아요</div>
-                            <div class="col-6">좋아요 수</div>
-                            <div class="col">날짜</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div><img src="../image/test.png" class="pro_img"> 닉네임</div>
-
-                    <img class="card-img-top" src="../image/test.png" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <div class="row">
-                            <div class="col">좋아요</div>
-                            <div class="col-6">좋아요 수</div>
-                            <div class="col">날짜</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-           
-
-
-
+        <div class="row" id="cardCollection">
 
     </div>
     </div>

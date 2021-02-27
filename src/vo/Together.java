@@ -1,6 +1,6 @@
 package vo;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Together {
 
@@ -11,17 +11,43 @@ public class Together {
 	 */
 
 	private String tog_no;
-//   private int together_info;
+  
 	private Together_Info info;
+	
 
 	private int tog_version;
 	private int tog_sum;
 	private int tog_people;
-	private Date tog_start_date;
-	private Date tog_end_date;
+	private String tog_start_date;
+	private String tog_end_date;
 	private int tog_status;
 	private String tog_confirm_cnt;
 	private int tog_sub_cnt;
+	
+
+
+	public Together(String tog_no, Together_Info info, String tog_start_date, String tog_end_date, String tog_confirm_cnt) {
+		super();
+		this.tog_no = tog_no;
+		this.info = info;
+		this.tog_start_date = tog_start_date;
+		this.tog_end_date = tog_end_date;
+		this.tog_confirm_cnt = tog_confirm_cnt;
+	}
+	
+	public Together(Together_Info info ) {
+
+		this.info = info;
+		
+	}
+
+	//version 얻어오기
+	public Together(int tog_version, int tog_people, int tog_sum) {
+		this.tog_version = tog_version;
+		this.tog_people = tog_people;
+		this.tog_sum = tog_sum;
+		
+	}
 
 	public String getTog_no() {
 		return tog_no;
@@ -63,19 +89,19 @@ public class Together {
 		this.tog_people = tog_people;
 	}
 
-	public Date getTog_start_date() {
+	public String getTog_start_date() {
 		return tog_start_date;
 	}
 
-	public void setTog_start_date(Date tog_start_date) {
+	public void setTog_start_date(String tog_start_date) {
 		this.tog_start_date = tog_start_date;
 	}
 
-	public Date getTog_end_date() {
+	public String getTog_end_date() {
 		return tog_end_date;
 	}
 
-	public void setTog_end_date(Date tog_end_date) {
+	public void setTog_end_date(String tog_end_date) {
 		this.tog_end_date = tog_end_date;
 	}
 
