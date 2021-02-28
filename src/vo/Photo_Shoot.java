@@ -23,9 +23,10 @@ public class Photo_Shoot {
 	private int pho_status;
 	private String pho_upload_date;
 
-	public Photo_Shoot(Member m, Together info, String pho_good, String pho_impression, int pho_like_cnt, String pho_upload_date) {
+	public Photo_Shoot(Member m, Together info,int pho_no ,String pho_good, String pho_impression, int pho_like_cnt, String pho_upload_date) {
 		this.member = m;
 		this.together = info;
+		this.pho_no = pho_no;
 		this.pho_good = pho_good;
 		this.pho_impression = pho_impression;
 		this.pho_like_cnt = pho_like_cnt;

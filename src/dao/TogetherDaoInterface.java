@@ -1,14 +1,13 @@
 package dao;
 
-import java.util.Date;
 import java.util.List;
 
 import exception.AddException;
 import exception.FindException;
 import exception.ModifyException;
 import vo.Photo_Shoot;
-import vo.Sign_Together;
 import vo.Together;
+import vo.Together_Info;
 
 public interface TogetherDaoInterface {
 
@@ -48,7 +47,7 @@ public interface TogetherDaoInterface {
 	 * @return money 잔액
 	 * @throws ModifyException
 	 */
-	public int pay(String together_info)throws ModifyException;
+	public void pay(String id, int balance)throws ModifyException;
 	
 	// 충전
 	// 충전후 잔액 반환
@@ -130,7 +129,13 @@ public interface TogetherDaoInterface {
 	
 	public List<Together> together_version(int info_no) throws FindException;
 	
-	public void together_insert_version(int info_no,String start, String end, int certified, int sub_certified) throws AddException;
+	public void together_insert_version(int info_no,String start, String end, int certified, int sub_certified, String id) throws AddException;
 	
 	public List<Photo_Shoot> searchPhoto(String option, String content) throws FindException;
+	
+	public void sign_insert (String id, String tog_no) throws AddException;
+	
+	public Together payInfoSelect(String tog_no ) throws FindException;
+	
+	public int phtoLike(String photo_no, String id) throws AddException;
 }

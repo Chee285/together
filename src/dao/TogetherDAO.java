@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import exception.AddException;
@@ -14,7 +13,6 @@ import exception.ModifyException;
 import sql.MyConnection;
 import vo.Member;
 import vo.Photo_Shoot;
-import vo.Sign_Together;
 import vo.Together;
 import vo.Together_Info;
 
@@ -115,7 +113,7 @@ public class TogetherDAO implements TogetherDaoInterface {
 
 	// together version을 생성합니다.
 	@Override
-	public void together_insert_version(int info_no, String start, String end, int certified, int sub_certified)
+	public void together_insert_version(int info_no, String start, String end, int certified, int sub_certified, String id)
 			throws AddException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -135,7 +133,7 @@ public class TogetherDAO implements TogetherDaoInterface {
 				new_version = info_no + "-" + upVersion;
 
 			}
-
+			// together_info insert 
 			String tog_info_insert_sql = "insert into together (tog_no, info_no, tog_version, tog_start_date, tog_end_date, tog_status, tog_confirm_cnt, tog_sub_cnt )  values(?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(tog_info_insert_sql);
 			pstmt.setString(1, new_version);
@@ -143,17 +141,56 @@ public class TogetherDAO implements TogetherDaoInterface {
 			pstmt.setInt(3, upVersion);
 			pstmt.setString(4, start);
 			pstmt.setString(5, end);
-			pstmt.setInt(6, 1);
+			pstmt.setInt(6, 1); 
 			pstmt.setInt(7, certified);
 			pstmt.setInt(8, sub_certified);
 			pstmt.executeUpdate();
+			
+			sign_insert(id, new_version);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
+	
+	// 진행중인 챌린지에 회원 추가하기
+	@Override
+	public void sign_insert(String id, String tog_no) throws AddException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String achv = "0";
+		System.out.println("tog_no : "+tog_no);
+		try {
+			con = MyConnection.getConnection();
+			String achv_select_sql = "select tog_sub_cnt from together where tog_no =?";
+			pstmt = con.prepareStatement(achv_select_sql);
+			pstmt.setString(1, tog_no);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				achv = rs.getString("tog_sub_cnt");
+			}
+		
+			String sign_insert_sql = "insert into sign_together values(sign_no_sequence.NEXTVAL,?, ?, ?,0,1)";
+			pstmt = con.prepareStatement(sign_insert_sql);
+			pstmt.setString(1, tog_no);
+			pstmt.setString(2, id);
+			pstmt.setString(3, achv);
+			pstmt.executeUpdate();
+		
+						
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+			
+		
+		
+	}
+	
+	
 	// 인증모아보기에서 페이지 모든 인증샷
 	@Override
 	public List<Photo_Shoot> photoCollection() throws FindException {
@@ -173,7 +210,7 @@ public class TogetherDAO implements TogetherDaoInterface {
 
 				Together_Info info = new Together_Info(rs.getString("info_name"));
 				Together t = new Together(info);
-				Photo_Shoot pho = new Photo_Shoot(m, t, rs.getString("pho_good"), rs.getString("pho_impression"),
+				Photo_Shoot pho = new Photo_Shoot(m, t, rs.getInt("pho_no"),rs.getString("pho_good"), rs.getString("pho_impression"),
 						rs.getInt("pho_like_cnt"), rs.getString("pho_upload_date"));
 
 				photoShoot.add(pho);
@@ -219,7 +256,7 @@ public class TogetherDAO implements TogetherDaoInterface {
 
 				Together_Info info = new Together_Info(rs.getString("info_name"));
 				Together t = new Together(info);
-				Photo_Shoot pho = new Photo_Shoot(m, t, rs.getString("pho_good"), rs.getString("pho_impression"),
+				Photo_Shoot pho = new Photo_Shoot(m, t, rs.getInt("pho_no"),rs.getString("pho_good"), rs.getString("pho_impression"),
 						rs.getInt("pho_like_cnt"), rs.getString("pho_upload_date"));
 
 				pho_list.add(pho);
@@ -234,10 +271,119 @@ public class TogetherDAO implements TogetherDaoInterface {
 	
 	}
 
+	// 결재하기 - 투게더 정보 가져오기
+		@Override
+		public Together payInfoSelect(String tog_no) throws FindException {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			String info_sql = "select * from together_info info join together t on t.info_no = info.info_no where t.tog_no = ? ";
+			try {
+				con = MyConnection.getConnection();
+				pstmt = con.prepareStatement(info_sql);
+				pstmt.setString(1, tog_no);
+				
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					String info_img = rs.getString("info_img");
+					String info_name = rs.getString("info_name");
+					int fee = rs.getInt("info_application_fee");
+					
+					String confirm_cnt = rs.getString("tog_confirm_cnt");
+					int sub_cnt = rs.getInt("tog_sub_cnt");
+					String start = rs.getString("tog_start_date");
+					String end = rs.getString("tog_end_date");
+					
+					Together_Info info = new Together_Info(info_img,info_name, fee);
+					Together tog = new Together(info, confirm_cnt,sub_cnt, start,end);
+					return tog;
+					
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			throw new FindException("해당 TOGETHER은 없습니다.");
+			}
+			
+			
+	// 선택한together 결재 하기
 	@Override
-	public int pay(String together_info) throws ModifyException {
-		// TODO Auto-generated method stub
-		return 0;
+	public void pay(String id, int balance) throws ModifyException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String payTogether_sql = "update members set mem_balance =? where mem_id = ?";
+		try {
+			con = MyConnection.getConnection();
+			pstmt = con.prepareStatement(payTogether_sql);
+			pstmt.setInt(1, balance-10000);
+			pstmt.setString(2, id);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	// 인증모아보기 - 좋아요 눌르면 좋아요 isnert
+	@Override
+	public int phtoLike(String photo_no,String id) throws AddException{
+		Connection con = null;
+		PreparedStatement pstmt =  null;
+		ResultSet rs = null;
+		String[] arr = photo_no.split("-");
+		if( arr[1].equals("insert")) {
+			String like_insert_sql = "insert into like_photo values(?,?)";
+			try {
+				con = MyConnection.getConnection();
+				pstmt = con.prepareStatement(like_insert_sql);
+				pstmt.setString(1, id);
+				pstmt.setString(2, arr[0]);
+				int  result = pstmt.executeUpdate();
+				
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else if(arr[1].equals("del")) {
+			String like_del_sql = "delete from like_photo where mem_id= ? and pho_no =? ";
+			try {
+				con = MyConnection.getConnection();
+				pstmt = con.prepareStatement(like_del_sql);
+				pstmt.setString(1, id);
+				pstmt.setString(2, arr[0]);
+				int result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		// 죄회수
+		
+		String select_sql = "select pho_like_cnt from photo_shoot where pho_no= ? ";
+		try {
+			pstmt = con.prepareStatement(select_sql);
+			pstmt.setString(1, arr[0]);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				int pho_like_cnt = rs.getInt("pho_like_cnt");
+				return pho_like_cnt;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		
+		}
+		throw new AddException("해당 인증샷이 삭제되었습니다.");
+		
+		
+		
+		
 	}
 
 	@Override
@@ -287,5 +433,12 @@ public class TogetherDAO implements TogetherDaoInterface {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
+	
+	
+
+	
 
 }

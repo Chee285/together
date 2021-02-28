@@ -6,6 +6,7 @@ import java.util.List;
 import dao.TogetherDAO;
 import exception.AddException;
 import exception.FindException;
+import exception.ModifyException;
 import vo.Photo_Shoot;
 import vo.Together;
 
@@ -42,9 +43,9 @@ public class TogetherService {
 	}
 
 	// together version 생성합니다. create
-	public void togetherVersionCreate(int info_no, String start, String end, int certified, int sub_certified) {
+	public void togetherVersionCreate(int info_no, String start, String end, int certified, int sub_certified, String id) {
 		try {
-			dao.together_insert_version(info_no,start, end, certified, sub_certified);
+			dao.together_insert_version(info_no,start, end, certified, sub_certified, id);
 		} catch (AddException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -76,4 +77,26 @@ public class TogetherService {
 		List<Photo_Shoot> pho_list = dao.searchPhoto(option, content);
 		return pho_list;
 	}
+	
+	// 결재하기 - 정보 출력
+	public Together infoSelect(String tog_no ) throws FindException {
+		Together payInfo;
+		payInfo=dao.payInfoSelect(tog_no);
+		return payInfo;
+	}
+
+	// 결재하기
+	public void pay(String tog_no, int balance, String id) throws ModifyException, AddException {
+		dao.sign_insert(id, tog_no);
+		dao.pay(id, balance);
+		
+	}
+	
+	// 인증모아보기 - 좋아요 누름
+	public int photoLike(String photo_no, String id) throws AddException {
+		int like_cnt =dao.phtoLike(photo_no, id);
+		return like_cnt;
+	}
+
+
 }

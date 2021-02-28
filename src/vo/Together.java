@@ -48,6 +48,16 @@ public class Together {
 		this.tog_sum = tog_sum;
 		
 	}
+	
+	// 결재하기 생성자
+	public Together(Together_Info info , String tog_confirm_cnt,int sub_cnt, String start, String end) {
+		this.info = info;
+		this.tog_confirm_cnt = tog_confirm_cnt;
+		this.tog_sub_cnt = sub_cnt;
+		this.tog_start_date = start;
+		this.tog_end_date = end;
+				
+	}
 
 	public String getTog_no() {
 		return tog_no;

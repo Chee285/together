@@ -38,6 +38,12 @@ public class Together_Info {
 		this.pho_bad = pho_bad;
 	}
 	
+	public Together_Info(String info_img, String info_name, int fee) {
+		this.info_img = info_img;
+		this.info_name = info_name;
+		this.info_application_fee = fee;
+	}
+	
 	public Together_Info(String info_name){
 		this.info_name=info_name;
 	}
