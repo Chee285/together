@@ -10,8 +10,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import service.TogetherService;
+import vo.Member;
 
 /**
  * Servlet implementation class TogetherVersionCreate
@@ -31,9 +33,11 @@ public class TogetherVersionCreateServlet extends HttpServlet {
 		int certified = Integer.parseInt(request.getParameter("how"));
 		System.out.println("certified : "+certified);
 		int sub_certified = Integer.parseInt(request.getParameter("sub_how"));
-
-		
-		service.togetherVersionCreate(info_no,start_date, end_date, certified, sub_certified);
+		// 세션에 값 가져오기
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("memInfo");
+		String id =member.getMem_id();
+		service.togetherVersionCreate(info_no,start_date, end_date, certified, sub_certified, id);
 		
 	}
 

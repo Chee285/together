@@ -32,6 +32,7 @@ public class TogetherSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("application/json;charset=utf-8");
 		TogetherService service = new TogetherService();
 		PrintWriter out= response.getWriter();
 		String option = request.getParameter("option");
@@ -54,6 +55,7 @@ public class TogetherSearchServlet extends HttpServlet {
 				map_list.put("mem_profile_img",pho.getMember().getMem_profile_img());
 				map_list.put("mem_nickname", pho.getMember().getMem_nickname());
 				map_list.put("info_name",pho.getTogether().getInfo().getInfo_name());
+				map_list.put("pho_no",pho.getPho_no());
 				map_list.put("pho_good", pho.getPho_good());
 				map_list.put("pho_impression",pho.getPho_impression());
 				map_list.put("pho_like_cnt", pho.getPho_like_cnt());
