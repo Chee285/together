@@ -67,8 +67,8 @@
     </script>
     <script type="text/javascript">
     $(function(){
-        $("header").load("./common/Header.html");
-        $("footer").load("./common/Footer.html");
+    	$("header").load("./main_content/Header.jsp");
+        $("footer").load("./main_content/Footer.jsp");    
         
        
        
@@ -79,8 +79,7 @@
         	data:  {info_no : getQueryString("info_no")},
         	success:function(data){
         	
-        		console.log(data);
-        		console.log(data[0]["tog_version"]);
+        		
         		
         		var version = "<ul>";
         		if(data.status == undefined){
@@ -99,12 +98,13 @@
         		}
         		
         	},error:function(jqXHR){
-        		alert(jqXHR.status);
+        		
         	}
         	
         	
         	
         });
+    //
         $(".version_insert").click(function(){
         	
         	var start_date = $('#start_date').val();
@@ -128,7 +128,7 @@
 					method : "get",
 					data:{info : info_no,start :start_date, end : end_date, how : certified,sub_how: sub_certified},
 					success:function(data){
-						alert("투게더 생성되었습니다!!  >> 메인페이지로 이동");
+						$(location).attr("href", "./");
 					}
 				})
         	}else if(start_date ==""){
@@ -140,6 +140,22 @@
         		alert("인증빈도를 선택하여주세요.");
         	}
     	});
+        
+    
+    
+        $(".version_update").click(function(){
+        	$.ajax({
+        		url:"./infoupdate",
+        		method:"post",
+        		data:{tog_no : 0, info_no: getQueryString("info_no") },
+        		success : function (data){
+        			
+        		},
+        		error:function(data){
+        			
+        		}
+        	});
+        });
         
         
     });
@@ -240,7 +256,7 @@
     <div class="container">
         <h3 style="margin-top:8px"> <%=t.getInfo().getInfo_name() %></h3>
         <div class="row">
-            <img class="detail_img" src="./image/test.png">
+            <img class="detail_img" src="./<%= t.getInfo().getInfo_img()%>">
             <div class="detail_certified">
                 <span style="background-color: gray;">&nbsp;1주일에 3번&nbsp;</span>
                 <br><br>
@@ -321,13 +337,13 @@
                 <div class="col">
                     <h5>이렇게 해주세요!</h5>
 
-                    <img class="detail_small_img" src="../image/test.png">
+                    <img class="detail_small_img" src="<%=t.getInfo().getPho_good()%>">
 
                 </div>
                 <div class="col">
                     <h5>이렇게 하면 안돼요!</h5>
 
-                    <img class="detail_small_img" src="../image/test.png">
+                    <img class="detail_small_img" src="<%=t.getInfo().getPho_bad()%>">
 
                 </div>
             </div>
@@ -355,10 +371,7 @@
                         <td>인증가능 요일&nbsp;&nbsp;</td>
                         <td>월 화 수 목 금 토 일</td>
                     </tr>
-                    <tr>
-                        <td>인증빈도&nbsp;&nbsp;</td>
-                        <td>주 1일( 바꿔야할 부분 )</td>
-                    </tr>
+                   
                     <tr>
                         <td>인증 가능 시간&nbsp;&nbsp;</td>
                         <td>24시간</td>
@@ -368,6 +381,7 @@
                         <td>인증 필요</td>
                     </tr>
                 </table>
+                <a href="togetherpage/infoadd.jsp?info_no=<%=t.getInfo().getInfo_no()%>"><button type="button" class="btn btn-primary version_update" style="float:right" >투게더 수정하기</button></a>
                 <button type="button" class="btn btn-primary version_insert" style="float:right">투게더 새로운 버전 만들기</button>
             </div>
         </div>

@@ -27,8 +27,8 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 
-		$("header").load("../common/Header.html"); //nav 인클루드
-		$("footer").load("../common/Footer.html"); //nav 인클루드
+		 $("header").load("./Header.jsp");  //nav 인클루드
+         $("footer").load("./Footer.jsp");  //nav 인클루드
 
 	});
 </script>
@@ -51,7 +51,7 @@
 					console.log(responseObj.status);
 					if (responseObj.status==1) {
 						alert("충전완료");
-						location.href//--------------------------main페이지로 강제이동
+						location.href="../"; 
 					} else if (responseObj.status==-1) {
 						alert("로그인되어있지 않습니다.");
 					} else if (responseObj.status==0) {
@@ -177,7 +177,7 @@ body>section>div>article>form>a.btn-outline-primary {
 					</div>
 					<!-- form-group// -->
 					<div class="form-group">
-						<label>결제금액</label> <input name="mem_balance" class="form-control"
+						<label>충전금액</label> <input name="mem_balance" class="form-control"
 							type="number" value="10000" max="990000" min="10000" step="10000">
 					</div>
 					<!-- form-group// -->

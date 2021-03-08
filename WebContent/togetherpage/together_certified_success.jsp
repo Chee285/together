@@ -1,5 +1,8 @@
+<%@page import="vo.Photo_Shoot"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+Photo_Shoot p = (Photo_Shoot)request.getAttribute("photo");%>
 <!DOCTYPE html>
 <html>
 
@@ -19,8 +22,8 @@
 	// HEADER / FOOTER
     $(document).ready( function() {
         
-        $("header").load("../common/Header.html");  //nav 인클루드
-        $("footer").load("../common/Footer.html");  //nav 인클루드
+    	$("header").load("./main_content/Header.jsp");
+        $("footer").load("./main_content/Footer.jsp");    
 
                     
     });
@@ -64,7 +67,7 @@
     <div class="article">
         
         <div class="container">
-            <h2>TOGETHER 제목</h2>
+            <h2>TOGETHER 인증성공 하셨습니다!!</h2>
             <div class="row">
                 
                 <div class="col-md-5">
@@ -73,7 +76,7 @@
 
                         <div id='View_area'
                             style='position:relative; color: black; border: 0px solid black; dispaly: inline; '>
-                            <img id ="prev_View_area" class="obj" src="../image/test.png">
+                            <img id ="prev_View_area" class="obj" src="<%=p.getPho_good()%>">
                         </div>
                         <!-- <img class="card-img-top" src="./image/test.png" alt="Card image cap" style="height:500px"> -->
 
@@ -81,9 +84,9 @@
                 </div>
                 <div class="col-md-7">
 
-                    <textarea id="paste"  readonly >이번 인증은 어떠셨나요? 나는 인증성공을 작성하고 있는것이다 어떻게 생각하느냐? 너무 귀찮고 생각하는대로 안되는게 너무 짜증나서 하기싫어진다. 차라리 back단을 하면 이것보다는 error만 잡고 패턴만 익히면되는데 하 빨리 back하고 이 프로젝트 털고 싶다.</textarea>
-                    <button type="button" class="btn btn-primary" >인증성공하였습니다</button>
-                    <img src="../image/new-product.png" style="width:150px; float:right">
+                    <textarea id="paste"  readonly ><%=p.getPho_impression() %></textarea>
+                    <button type="button" class="btn btn-primary" onclick ="location.href='./'" >인증성공하였습니다</button>
+                    <img src="http://localhost:8889/together/common_images/new-product.png" style="width:150px; float:right">
                     
                     
                 </div>

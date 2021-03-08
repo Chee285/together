@@ -1,7 +1,8 @@
+<%@page import="vo.Together_Info"%>
 <%@page import="vo.Together"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%Together t = (Together)request.getAttribute("together_detail"); %>
+ <%Together t = (Together)request.getAttribute("info"); %>
 <!DOCTYPE html>
 <html>
 
@@ -21,11 +22,54 @@
     <script type="text/javascript">   
         $(document).ready( function() {
             
-            $("header").load("./common/Header.html");  //nav 인클루드
-            $("footer").load("./common/Footer.html");  //nav 인클루드
+        	$("header").load("./main_content/Header.jsp");
+            $("footer").load("./main_content/Footer.jsp");    
     
-                  
-        
+            function getQueryString(key) {
+           	 
+                // 전체 Url을 가져온다.
+                var str = location.href;
+             
+                // QueryString의 값을 가져오기 위해서, ? 이후 첫번째 index값을 가져온다.
+                var index = str.indexOf("?") + 1;
+             
+                // Url에 #이 포함되어 있을 수 있으므로 경우의 수를 나눴다.
+                var lastIndex = str.indexOf("#") > -1 ? str.indexOf("#") + 1 : str.length;
+             
+                // index 값이 0이라는 것은 QueryString이 없다는 것을 의미하기에 종료
+                if (index == 0) {
+                    return "";
+                }
+             
+                // str의 값은 a=1&b=first&c=true
+                str = str.substring(index, lastIndex); 
+             
+                // key/value로 이뤄진 쌍을 배열로 나눠서 넣는다.
+                str = str.split("&");
+             
+                // 결과값
+                var rst = "";
+             
+                for (var i = 0; i < str.length; i++) {
+             
+                    // key/value로 나눈다.
+                    // arr[0] = key
+                    // arr[1] = value
+                    var arr = str[i].split("=");
+             
+                    // arr의 length가 2가 아니면 종료
+                    if (arr.length != 2) {
+                        break;
+                    }
+             
+                    // 매개변수 key과 일치하면 결과값에 셋팅
+                    if (arr[0] == key) {
+                        rst = arr[1];
+                        break;
+                    }
+                }
+                return rst;
+            }
         });
     </script>
     <style>
@@ -109,12 +153,12 @@
     </header>
 
     <div class="container">
-        <h3 style="margin-top:8px"><%=t.getInfo().getInfo_name() %></h3>
+        <h3 style="margin-top:8px"><%= t.getInfo().getInfo_name() %></h3>
         <div class="row">
-            <img class="detail_img" src="./common_images/img_ex.png">
+            <img class="detail_img" src="<%= t.getInfo().getInfo_img()%>">
             <div class="detail_certified">
                 <span style="background-color: gray;">&nbsp;1주일에 3번&nbsp;</span>
-                <span>기간 <%--<%=t.getTog_start_date() %>(일) ~ <%=t.getTog_end_date() %>(일)</span><br><br>--%>
+                <span>기간 <%= t.getTog_start_date() %>(일) ~ <%=t.getTog_end_date() %>(일)</span><br><br>
 
                 <p style="background-color: gray; width:100%">
                     100% 성공 전액 페이백 + 상금<br>
@@ -139,7 +183,7 @@
                     데이터를 불러와서 여기에닥 값을 넣어둬
                     이뻐으면 좋겠네요 반드시!!!!
                 </p> -->
-                <p style="line-height: 30px;">
+                <p>
                 	<%=t.getInfo().getInfo_how_confirm() %>
                 </p>
 
@@ -148,13 +192,13 @@
                 <div class="col">
                     <h5>이렇게 해주세요!</h5>
 
-                    <img class="detail_small_img" src="./common_images/img_ex.png">
+                    <img class="detail_small_img" src="<%= t.getInfo().getPho_good()%>">
 
                 </div>
                 <div class="col">
                     <h5>이렇게 하면 안돼요!</h5>
 
-                    <img class="detail_small_img" src="./common_images/img_ex.png">
+                    <img class="detail_small_img" src="<%= t.getInfo().getPho_bad()%>">
 
                 </div>
             </div>
@@ -182,10 +226,7 @@
                         <td>인증가능 요일&nbsp;&nbsp;</td>
                         <td>월 화 수 목 금 토 일</td>
                     </tr>
-                    <tr>
-                        <td>인증빈도&nbsp;&nbsp;</td>
-                        <td>주 1일( 바꿔야할 부분 )</td>
-                    </tr>
+                   
                     <tr>
                         <td>인증 가능 시간&nbsp;&nbsp;</td>
                         <td>24시간</td>
@@ -194,14 +235,16 @@
                         <td>공휴일 인증&nbsp;&nbsp;</td>
                         <td>인증 필요</td>
                     </tr>
+                
                 </table>
-                <button type="button" class="btn btn-primary" style="float:right">결재하기</button>
+    
             </div>
         </div>
-
-        <!-- <button type="button" class="btn btn-primary">결재하기</button> -->
+<% if(request.getParameter("mypage").equals("off")){ %>
+         <button type="button" class="btn btn-primary" onclick = "location.href='./togetherpage/together_pay.jsp?tog_no=<%=t.getTog_no() %>'">결재하기</button>
+         <%} %>
     </div>
-</
+
 
 </body>
 <footer></footer>

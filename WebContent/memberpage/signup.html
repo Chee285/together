@@ -1,29 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>TOGETHER 회원가입</title>
-    
-    <!-- 파비콘 -->
-    <link rel="shortcut icon" href="../common_images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="../common_images/favicon.ico" type="image/x-icon">
-   
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-           <script type="text/javascript">   
-        $(document).ready( function() {
-            
-            $("header").load("../common/Header.html");  //nav 인클루드
-            $("footer").load("../common/Footer.html");  //nav 인클루드
-    
-                        
-        });
-    </script>
-<script>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TOGETHER 회원가입</title>
+
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="../common_images/favicon.ico"
+	type="image/x-icon">
+<link rel="icon" href="../common_images/favicon.ico" type="image/x-icon">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+	crossorigin="anonymous"></script>
+	    <script type="text/javascript">
+	$(document).ready(function() {
+
+		 $("header").load("./Header.jsp");  //nav 인클루드
+         $("footer").load("./Footer.jsp");  //nav 인클루드
+
+	});
+</script>
+<script type="text/javascript">   
+                       
      function previewImage(targetObj, View_area) {
             var preview = document.getElementById(View_area); //div id
             var ua = window.navigator.userAgent;
@@ -92,93 +100,233 @@
                 }
             }
         }
-</script>    
+</script>
+<script>
+      $(document).ready( function() {
+            
+    
+			//아이디입력란에 포커스를 받으면 가입버튼 화면에서 사라진다.
+			var $idObj = $("input[name=mem_id]");
+			$idObj.focus(function(){
+					//DOM트리에서 typel속성값이 submit인 input객체찾기
+					var $btSignup = $("button[type=submit]");
+					//input객체를 화면에 없앤다
+					$btSignup.css("visibility","hidden"); //css값을 이용해서 visibility값을 hidden으로 설정해준다. 아이디창에 포커스 되면 회원가입버튼이 사라진다
+				});
+			
+            /*아이디중복체크*/
+			var $btnObj = $(".idchk");	
+			$btnObj.click(function(event){
+				var $idObj = $("input[name=mem_id]");
+				var idValue = $idObj.val();
+				if(idValue.trim() == ''){
+					alert("아이디를 입력하세요");
+					$idObj.focus();
+					return false;
+                }
+                var $btnObj2 = $(".pwdchk");
+                $btnObj2.click(function(event){
+                    //비밀번호값이 같은가 유효성검사
+                    var pwdValue = $("input[name=mem_pwd]").val();
+            		var pwd1Value = $("input[name=mem_chkpwd]").val();
+ 					if(pwdValue!=pwd1Value){
+ 						alert("비밀번호가 일치하지 않습니다")
+ 						$("input.pwd").focus();
+ 						return false;
+ 					}
+                });
+          
+				
+                $.ajax({
+							url : '../idchk' ,//"./iddupchk", //'http://localhost:8888/myfront/login', //요청URL
+							method: "post" ,   //요청방식
+							//data : "id="+idValue+"&pwd="+pwdValue, //요청시 전달데이터 
+							data : {"id": idValue},
+							success: function(responseObj){ //data는 응답내용, 자료형은 string
+								
+								if(responseObj.status == 1){
+									alert("이미 존재하는 아이디입니다");
+								}else{
+									alert("사용가능한 아이디입니다");
+									/*닉네임 중복확인 확인 후 회원가입 버튼 보여주기*/
+									//DOM트리에서 typel속성값이 submit인 input객체찾기
+									var $btSignup = $(".signup");
+									//input객체를 화면에 보여준다
+									$btSignup.css("visibility","visible"); //css값을 이용해서 visibility값을 visible로 설정해준다. 사용가능한 아이디일 때만 버튼이 나타난다
+								}
+							},
+							error: function(jqXHR){
+								alert(jqXHR.status);
+							}
+						});							
+						//event.preventDefault();
+						//return false;				
+					});
+
+			
+
+                    
+ 
+   
+		             /*닉네임 중복체크*/
+			    	var $btnObj1 = $("body > section > div > div.insertpage > div > div > form > div > div.nohiddenbox > input.btn.btn-primary.nickchk");	
+			    	$btnObj1.click(function(event){
+				    	var $nickObj = $("input[name=mem_nickname]");
+				     	var nickValue = $nickObj.val();
+					    if(nickValue.trim() == ''){
+					    	alert("닉네임을 입력하세요");
+					     	$idObj.focus();
+						    return false;
+		            }
+
+						
+				
+			        $.ajax({
+						url : '../nickchk' , //요청URL
+						method: "post" ,   //요청방식
+						//data : "id="+idValue+"&pwd="+pwdValue, //요청시 전달데이터 
+						data :{"nickname": nickValue},
+						success: function(responseObj){ //data는 응답내용, 자료형은 string
+							
+							//alert(data);  
+							//alert(responseObj.status);
+							if(responseObj.status == 1){
+								alert("이미 존재하는 닉네임입니다");
+							}else{
+								alert("사용가능한 닉네임입니다");
+
+							}
+						},
+						error: function(jqXHR){
+							alert(jqXHR.status);
+						}
+					});						
+					//event.preventDefault();
+					//return false;	
+			    	});
+				
+
+          	 //가입버튼이 클릭되면 서버로 데이터 전송
+               $(".signup").submit(function(){
+            		
+             		var url = '../signup';
+             		var method ='post';
+             		//var data =  $('form').serialize();
+					 var form = $("form.signuppass")[0];
+                     var formData = new FormData(form);
+             		$.ajax({
+             			url : url,
+             			method:method,
+             			//data:data,
+             			success:function(responseObj){
+
+             				if(responseObj.status==1){
+             					alert("가입성공");
+             					location.href="../main.jsp";
+             					
+             				}else{
+             					alert("가입실패");
+             				}
+             			},
+             			error:function(jqXHR){
+             				alert(jqXHR.status);  //404,403, 500 : 서버문제
+             			  },
+                        enctype: 'multipart/form-data',
+                        contentType: false,
+                        processData: false,
+                        data: formData
+             		});
+             		return false;  //even.stopPropagation(); event.preventDefault();
+            
+               });
+      });
+            		
+</script>
 
 </head>
 <style>
-
 @font-face {
-    font-family: 'BMJUA';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'BMJUA';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
-    body 
-{
-    background: url(../common_images/bgi.png) no-repeat center/cover;
-    
+
+body {
+	background: url(../common_images/bgi.png) no-repeat center/cover;
 }
-   body > section
-   {
-      font-family: 'BMJUA';
-   }
-h1
-{
-    margin-top: 100px;
+
+body>section {
+	font-family: 'BMJUA';
 }
-    body > section >div {
-        max-width: 500px;
-        min-height: 100%;
-        padding: 0 15px 100px 30px;
-        box-sizing: border-box;
-        position: relative;
-        margin: 0 auto;
-    }
-    body > section > div > div.logo{
-        margin:100px auto  100px auto;
-        padding: 76px 0 60px 0;
-        height: 20px;
-        text-align: center;
-    }
 
-   .signup{
-   margin:100px auto  100px auto;
-   
-   }
-    body > section > div > div.logo > img{
-        width: 100%;
+h1 {
+	margin-top: 100px;
+}
 
-    }
-    body > section > div > div.insertpage > div > div > form > div > div.nohiddenbox,
-    body > section > div > div.insertpage > div > div > form > div > div.hiddenbox
-    {
-        margin: 0px 0px 0px 20px;
-    }
+body>section>div {
+	max-width: 500px;
+	min-height: 100%;
+	padding: 0 15px 100px 30px;
+	box-sizing: border-box;
+	position: relative;
+	margin: 0 auto;
+}
 
-    body > section > div > div.insertpage > div > div > form > div > div.nohiddenbox > h5:nth-child(n+1)
-    {
-        margin: 20px 30px 5px 0px;
-        
-    }
+body>section>div>div.logo {
+	margin: 100px auto 100px auto;
+	padding: 76px 0 60px 0;
+	height: 20px;
+	text-align: center;
+}
 
-    body > section > div > div.insertpage > div > div > form > div > div.nohiddenbox > input.insert
-    {
-        width: 65%;
-        font-size: 15px;
-        margin: 10px auto 10px auto;
-        background-color: rgba(256,256,256,0.2);
-        border-top-style: hidden;
-        border-left-style: hidden;
-        border-right-style: hidden;
-        
-    }
-    body > section > div > div.insertpage > div > div > form > div > div.nohiddenbox > input.insertbox
-    {
-        width:100%;
-        height: 100px;
-    }
+.signup {
+	margin: 100px auto 100px auto;
+}
 
-    body > section > div > div.insertpage > div > div > form > div > div.hiddenbox{
-        display: none;
-    }
-    .insertbox
-    {
-        padding: 30px;
-        background-color: rgba(256,256,256,0.2);
-        border-radius: 10px;
-        
-    }
-    /*
+body>section>div>div.logo>img {
+	width: 100%;
+}
+
+body>section>div>div.insertpage>div>div>form>div>div.nohiddenbox, body>section>div>div.insertpage>div>div>form>div>div.hiddenbox
+	{
+	margin: 0px 0px 0px 20px;
+}
+
+body>section>div>div.insertpage>div>div>form>div>div.nohiddenbox>h5:nth-child(n+1)
+	{
+	margin: 20px 30px 5px 0px;
+}
+
+body>section>div>div.insertpage>div>div>form>div>div.nohiddenbox>input.insert
+	{
+	width: 65%;
+	font-size: 15px;
+	margin: 10px auto 10px auto;
+	background-color: rgba(256, 256, 256, 0.2);
+	border-top-style: hidden;
+	border-left-style: hidden;
+	border-right-style: hidden;
+}
+
+body>section>div>div.insertpage>div>div>form>div>div.nohiddenbox>input.insertbox
+	{
+	width: 100%;
+	height: 100px;
+}
+
+body>section>div>div.insertpage>div>div>form>div>div.hiddenbox {
+	display: none;
+}
+
+.insertbox {
+	padding: 30px;
+	background-color: rgba(256, 256, 256, 0.2);
+	border-radius: 10px;
+}
+/*
     input.button
     {
         color: #fff;
@@ -195,77 +343,83 @@ h1
         border-color:  rgb(142, 192, 227)!important;
         float: right;
     }*/
-   .btn-save
-   {
-      float: right;
-      width : 100px;
-   }
-    /* 
+.btn-save {
+	float: right;
+	width: 100px;
+}
+/* 
     이미지파일 미리보기
     */
-
 </style>
 <body>
-    <header>
+	<header> </header>
+	<section>
+		<div class="signup">
+			<div class="title">
+				<h1>회원가입</h1>
+			</div>
+			<div class="insertpage">
+				<div class="signupoutterbox">
+					<div class="signupinnerbox">
+						<form class="signuppass" >
+							<div class="insertbox">
+								<div class="nohiddenbox">
+									<h5>아이디</h5>
+									<input class="insert" type="text" name="mem_id"
+										placeholder="아이디"> <input
+										class="btn btn-primary idchk" type="button" value="중복확인">
+									<h5>비밀번호</h5>
+									<input class="insert" type="password" name="mem_pwd"
+										placeholder="비밀번호"> <input class="insert"
+										type="password" name="mem_chkpwd" placeholder="비밀번호확인">
+									<input class="btn btn-primary pwdchk" type="button"
+										value="비밀번호확인">
+									<h5>닉네임</h5>
+									<input class="insert" type="text" name="mem_nickname"
+										placeholder="닉네임"> <input
+										class="btn btn-primary nickchk" type="button" name="nchk" value="중복확인">
+									<h5>이름</h5>
+									<input class="insert" type="text" name="mem_name">
+									<h5>생일</h5>
+									<input class="insert" type="date" name="mem_birthday">
+									<h5>핸드폰번호</h5>
+									<input class="insert" type="tel" name="mem_phone_num"
+										placeholder="01012345678">
+									<h5>이미지</h5>
+									<div id='View_area'
+										style='position: relative; color: black; border: 0px solid black; margin: 0;'>
+										<img id="prev_View_area" class="obj"
+											src="../common_images/img_ex.png"> <input type="file"
+											name="mem_profile_img" class="commfloat insert" id="profile_pt"
+											onchange="previewImage(this,'View_area')"
+											style="margin-top: 20px;">
+									</div>
+									<h5>상태메시지</h5>
+									<input class="insertbox" type="textarea" clos="30" rows="10"
+										placeholder="최대 30자까지 작성 가능합니다" name="mem_status_message">
+								</div>
+								<div class="hiddenbox">
+									<h5>잔액</h5>
+									<input class="insert" type="number" name="mem_balance" value="0">
+								</div>
+							</div>
+					
 
-    </header>
-    <section>
-        <div class = "signup">
-            <div class="title">
-                <h1>회원가입</h1>
-            </div>
-            <div class="insertpage">
-                <div class="signupoutterbox">
-                    <div class="signupinnerbox">
-                        <form class="signuppass">
-                            <div class="insertbox">
-                                <div class="nohiddenbox">
-                                    <h5>아이디</h5>
-                                    <input class = "insert" type="text"  name="mem_id" placeholder="아이디" >
-                                    <input class="btn btn-primary" type="button" value="중복확인">
-                                    <h5>비밀번호</h5>
-                                    <input class="insert" type="password" name="mem_pwd" placeholder="비밀번호">
-                                    <input class="insert" type="password" name="mem_chkpwd" placeholder="비밀번호확인">
-                                    <input class="btn btn-primary" type="button" value="비밀번호확인">
-                                    <h5>닉네임</h5>
-                                    <input class = "insert" type="text"  name="mem_nickname" placeholder="닉네임" >
-                                    <h5>이름</h5>
-                                    <input class = "insert" type="text"  name="mem_name">
-                                    <h5>생일</h5>
-                                    <input class = "insert" type="date"  name="mem_birthday">
-                                    <h5>핸드폰번호</h5>
-                                    <input class = "insert" type="tel"  name="mem_phone_num" placeholder="01012345678">
-                                    <h5>이미지</h5>
-                                    <div id='View_area' style='position:relative; color: black; border: 0px solid black; margin:0 0px 0 100px ;'>
-                                        <img id ="prev_View_area" class="obj" src="../common_images/img_ex.png">
-                                    
-                                    <input type="file" name="profile_pt" class="commfloat insert" id="profile_pt" onchange="previewImage(this,'View_area')" style="margin-top:20px;">
-                                    </div>
-                                    <h5>상태메시지</h5>
-                                    <input class = "insertbox" type="textarea" clos="30" rows="10" placeholder="최대 30자까지 작성 가능합니다" name="mem_status_message" >
-                                </div>
-                                <div class="hiddenbox">
-                                    <h5>잔액</h5>
-                                    <input class = "insert" type="number"  name="id" value="0" >
-                                </div>
-                            </div>                            
-                        </form>
+						<div class="form-group">
+							<div class="col-xs-12">
+								<br>
+								<button class="btn btn-primary btn-save signup" type="submit" style="margin:0;">
+									<i class="glyphicon glyphicon-ok-sign"></i> 회원가입
+								</button>
+							</div>
+						</div>
+					 </form>
+					</div>
 
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                 <br>
-                                   <button class="btn btn-primary btn-save" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> 저장</button>
-                             </div>
-                       </div>
-
-                    </div>
-                    
-            </div>
-              </div>
-        </div>
-    </section>
-    <footer>
-
-    </footer>
+				</div>
+			</div>
+		</div>
+	</section>
+	<footer> </footer>
 </body>
 </html>

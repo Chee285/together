@@ -17,8 +17,8 @@
     <script type="text/javascript">   
         $(document).ready( function() {
             
-            $("header").load("../common/Header.html");  //nav 인클루드
-            $("footer").load("../common/Footer.html");  //nav 인클루드
+        	 $("header").load("./Header.jsp");  //nav 인클루드
+             $("footer").load("./Footer.jsp");  //nav 인클루드
     
                         
         });

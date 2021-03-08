@@ -17,7 +17,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     
     <title>TOGETHER 로그인</title>
-    
+    <script type="text/javascript">
+	
+</script>
     
     <script type="text/javascript">   
     $(function(){
@@ -64,7 +66,7 @@
                        alert("로그인성공");//로그인성공
                        //location.href="http://localhost:8888/together/main.html";  //웹컴페이지를 요청
                        
-                       location.href="http://localhost:8888/together/memberpage/charge.jsp";  //test하기위한 location
+                       location.href="../main.jsp";  //test하기위한 location
                        
                   }else if(responseObj.status==0){
                           alert("회원가입해주세요");//아이디값을 찾아오지 못했을때 
@@ -74,7 +76,7 @@
                   }
                 },
                 error:function (jQueryXHR) {
-                    alert(jQueryXHR);//에러뜸(아이디는 찾았지만 비번이 다를경우....)
+                    alert(jQueryXHR.status);//에러뜸(아이디는 찾았지만 비번이 다를경우....)
                 }
             });
         	
@@ -82,14 +84,7 @@
         });
     });
     </script>
-    <script>
-    $(document).ready( function() {
-            
-            $("header").load("../common/Header.html");  //nav 인클루드
-            $("footer").load("../common/Footer.html");  //nav 인클루드
-                        
-        });
-    </script>
+
 
 <style>
          @font-face {
@@ -174,7 +169,7 @@
 
 <body>
     <header>
-
+<%@include file="./Header.jsp" %>
     </header>
     <section>
         <div class="card">
@@ -199,13 +194,13 @@
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block"> 로그인  </button>
                 </div> <!-- form-group// -->    
-                <a href="signup.jsp" class="float-right btn btn-outline-primary">회원가입</a>                                                       
+                <a href="signup.html" class="float-right btn btn-outline-primary">회원가입</a>                                                       
             </form>
             </article>
             </div> <!-- card.// -->
     </section>
     <footer>
-
+<%@include file="./Footer.jsp" %>
     </footer>
     
 </body>

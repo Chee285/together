@@ -11,21 +11,20 @@
     <link rel="shortcut icon" href="../common_images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="../common_images/favicon.ico" type="image/x-icon">
     
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 <title>TOGETHER 아이디 찾기</title>
 
-    <script type="text/javascript">   
-        $(document).ready( function() {
-            
-            $("header").load("../common/Header.html");  //nav 인클루드
-            $("footer").load("../common/Footer.html");  //nav 인클루드
-    
-                        
-        });
-    </script>
+    <script type="text/javascript">
+	$(document).ready(function() {
+
+		 $("header").load("./Header.jsp");  //nav 인클루드
+         $("footer").load("./Footer.jsp");  //nav 인클루드
+
+	});
+</script>
     
     <script>
     $ (function(){
@@ -49,7 +48,8 @@
 	    	                 console.log(responseObj);
 	    	              if(responseObj.mem_id != null){
 		                		  alert(responseObj.mem_name+"님의 아이디는 "+responseObj.mem_id+"입니다.");	    
-	                	  }else{
+	                	  		location.href="./login.jsp"
+	    	              }else{
 	                		  if(responseObj.status==-1){
 	                			  console.log(responseObj);
 		                      	alert("등록된 회원이 없습니다.");

@@ -14,6 +14,8 @@
     <title>TOGETHER 마이페이지</title>
         <script type="text/javascript">   
         $(document).ready( function() {
+        	
+        	location.href = "../mypage";
             
             $("header").load("../common/Header.html");  //nav 인클루드
             $("footer").load("../common/Footer.html");  //nav 인클루드
@@ -363,20 +365,19 @@
 </head>
 <body>
     <header>
-            
+      
     </header>
 <section>
-
-    <div id="intro">
+       
+    <div id="intro" >
         <article> 
            
             <section>
         <hr>
-        <div class="container bootstrap snippet">
+        <div class="container bootstrap snippet ">
             <div class="row">
-                  <div class="col-sm-4"><h1>나의 정보</h1></div>
-                  <!--******************************** 정보수정으로 넘어가는 버튼 필요 ************************** -->
-                <div class="col-sm-7"><h2>
+                  <div class="col-sm-4"><h1>나의 정보 <span><input type="button" value="정보수정"class="btn btn-primary btn-block" style="font-size: 12px ;padding:0px; height: 25px; float: right; margin-top: 15px;" id="idButton"></span> </h1></div>
+                <div class="col-sm-8"><h2>
                     진행중인 투게더
                 </h2></div>
             </div>
@@ -417,7 +418,7 @@
                   <div class="tab-content">
                     <div class="tab-pane active" id="home">
                         <hr>
-                          <form class="form" action="##" method="post" id="registrationForm">
+                          <form class="form"  method="post" id="registrationForm">
                               <div class="form-group">
                                   
                                   <div class="col-xs-6">
@@ -448,7 +449,7 @@
                        <h2></h2>
                        
                        <hr>
-                          <form class="form" action="##" method="post" id="registrationForm">
+                          <form class="form"  method="post" id="registrationForm">
                             <div class="form-group">
                                   
                                 <div class="col-xs-6">
@@ -476,7 +477,7 @@
                      </div><!--/tab-pane-->
                      <div class="tab-pane" id="settings">           
                           <hr>
-                          <form class="form" action="##" method="post" id="registrationForm">
+                          <form class="form"method="post" id="registrationForm">
                             <div class="form-group">
                                   
                                 <div class="col-xs-6">
@@ -513,7 +514,7 @@
     </div>
 
     
-    <article>
+    <article class="mytogopen">
         <div  id="mytog">
         <p>내가 개설한 TOGETHER</p>
          </div>
@@ -569,7 +570,7 @@
 
     </article>
 
-    <article>
+    <article class="mytogcomplete">
         <div  id="mytog">
         <p>참여 완료 TOGETHER</p>
          </div>
@@ -621,11 +622,277 @@
             </div>
         </div>
     
-
-
+    	
     </article>
+
+<!-- 내정보 수정 시작-->
+    
+<article class='myinfo' style="display: none;">
+        
+<script>
+$(function(){
+    /*내정보수정 버튼클릭*/
+    $("#idButton").click(function(){
+        alert("내정보수정 버튼 클릭");
+        $.ajax({
+            url: '../changemyinfo'
+            ,method : 'get'
+            ,success:function(responseObj){
+                $("div#intro").hide();
+                $("article.mytogopen").hide();
+                
+                $("article.mytogcomplete").hide();
+                $("article")
+                $('#first_name').val(responseObj.mem_nickname);
+                $('#last_name').val(responseObj.mem_name);
+                $('#phone').val(responseObj.mem_phone_num);
+
+                $("#idButton").hide();
+                $("article.myinfo").show();
+            }
+        });
+    });
+     /*내정보수정 버튼클릭 끝*/
+
+     /*닉네임 focus되면 저장버튼 사라짐*/
+     var $nickObj = $("#first_name");
+			$nickObj.focus(function(){
+					var $btSignup = $("#save");
+					//input객체를 화면에 없앤다
+                    //css값을 이용해서 visibility값을 hidden으로 설정해준다. 닉네임창에 포커스 되면 회원가입버튼이 사라진다
+					$btSignup.css("visibility","hidden"); 
+				}); 
+
+
+        /*닉네임 중복체크*/
+        var $btnObj1 = $("#nick_idchk");	
+    $btnObj1.click(function(event){
+        var $nickObj = $("#first_name");
+        var nickValue = $nickObj.val();
+        if(nickValue.trim() == ''){
+            alert("닉네임을 입력하세요");
+            $idObj.focus();
+            return false;
+    }
+    var $btnObj2 = $("#pwd_pwdchk");
+                $btnObj2.click(function(event){
+                    //비밀번호값이 같은가 유효성검사
+                    var pwdValue = $("#password").val();
+            		var pwd1Value = $("#password2").val();
+ 					if(pwdValue!=pwd1Value){
+ 						alert("비밀번호가 일치하지 않습니다")
+ 						$("input.pwd").focus();
+ 						return false;
+ 					}
+                });
+
+        
+
+    $.ajax({
+        url : '../nickchk' , //요청URL
+        method: "post" ,   //요청방식
+        //data : "id="+idValue+"&pwd="+pwdValue, //요청시 전달데이터 
+        data :{"nickname": nickValue},
+        success: function(responseObj){ //data는 응답내용, 자료형은 string
+            
+            //alert(data);  
+            //alert(responseObj.status);
+            if(responseObj.status == 1){
+                alert("이미 존재하는 닉네임입니다");
+            }else{
+                alert("사용가능한 닉네임입니다");
+                var $btSignup = $("#save");
+				$btSignup.css("visibility","visible");
+
+
+            }
+        },
+        error: function(jqXHR){
+            alert(jqXHR.status);
+        }
+    });						
+    //event.preventDefault();
+    //return false;	
+    });
+    /*닉네임 중복체크 끝*/
+
+
+    /*정보수정 저장버튼 클릭*/
+    $("#save").click(function(){
+        alert("저장버튼 클릭");
+
+        $.ajax({
+            url: '../changemyinfo'
+            ,method : 'post'
+            ,data :  $('.savemove').serialize()
+            ,success : function(responseObj){            
+                if(responseObj.status == 1){
+									alert("저장성공");
+                                    $("article.myinfo").hide();
+                                    $("div#intro").show();
+                                    $("article.mytogopen").show();
+                                    $("#idButton").show();
+                                   $("article.mytogcomplete").show();
+                                    
+								}else{
+                                    alert("다시 기입해 주세요");
+								}
+							},error: function(jqXHR){
+								alert(jqXHR.status);
+                            }
+
+    });
+
+});
+/*정보수정 저장버튼 클릭 끝*/
+});
+</script>
+<style>
+    @font-face {
+   font-family: 'BMJUA';
+   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+   font-weight: normal;
+   font-style: normal;
+}
+   body 
+{
+   background: url(../common_images/bgi.png) no-repeat center/cover;
+   
+}
+  body > section
+  {
+     font-family: 'BMJUA';
+  }
+#registrationForm > div:nth-child(n+1) > div > input
+{
+   width: 70%;
+}
+/* 입금은행 drop-down */
+#registrationForm > div:nth-child(4) > div > select
+{
+   margin-left: 20px;
+   height: 30px;
+}
+/* 저장버튼 */
+button.btn.btn-lg.btn-success,
+button.btn.btn-lg.btn-success:active 
+{
+   background-color: rgb(142, 192, 227);
+   border-color:  rgb(142, 192, 227);
+}
+
+/* media query*/
+@media screen and (max-width: 768px) {
+       body>section>div{
+
+       width: 50%; 
+       height: 100%; 
+       margin:285px 100px;
+       background-position-x: left;
+       background-size: 30%;
+
+       }
+   }
+   @media screen and (max-width: 411px) {
+
+       body>section>div{
+       width: 80%; 
+       height: 100%; 
+       background-position-x: left;
+       margin: 135px auto;
+
+       }
+   }
+   @media screen and (max-width: 375px) {
+
+       body>section>div{
+       background-origin: padding-box; 
+       width: 90%; 
+       height: 100%; 
+       background-size: 20%;
+       margin: 180px auto;
+
+       }
+   }
+</style>
+ <div class="container bootstrap snippet" style="margin-top: 100px; margin-bottom: 100px;" >
+    <div class="row">
+          <div class="col-sm-10"><h1>정보수정</h1></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-9">   
+          <div class="tab-content">
+            <div class="tab-pane active" id="home">
+                <hr>
+                  <form class="form savemove" method="post" id="registrationForm">
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="first_name"><h4 style="display: inline-block;">닉네임</h4></label>
+                              <span><input type="button" value="중복확인"class="btn btn-primary btn-block" style="width: 70px;padding: 0;display: inline-block;" id="nick_idchk"></span>
+                              <input type="text" class="form-control" name="mem_nickname" id="first_name" placeholder="" title="enter your first name if any.">
+                             
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                            <label for="last_name"><h4 >이름</h4></label>
+                              <input type="text" class="form-control" name="mem_name" id="last_name" placeholder="" title="enter your last name if any.">
+                          </div>
+                      </div>
+          
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="phone"><h4>핸드폰번호</h4></label>
+                              <input type="text" class="form-control" name="mem_phone_num" id="phone" placeholder="휴대폰 번호를 '-' 없이 입력하세요" title="enter your phone number if any.">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <div class="col-xs-6">
+                              <label for="password"><h4>비밀번호</h4></label>
+                              <input type="password" class="form-control" name="mem_pwd" id="password" placeholder="새로운 비밀번호를 입력하세요" title="enter your password.">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                            <label for="password2"><h4 style="display: inline-block;">비밀번호 확인</h4></label>
+                            <span><input type="button" value="중복확인"class="btn btn-primary btn-block" style="width: 70px;padding: 0;display: inline-block;" id="pwd_pwdchk"></span>
+                              <input type="password" class="form-control" name="mem_chkpwd" id="password2" placeholder="비밀번호를 한 번 더 입력하세요" title="enter your password2.">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                           <div class="col-xs-12">
+                                <br>
+                                  <button class="btn btn-primary" type="submit" id="save"><i class="glyphicon glyphicon-ok-sign"></i> 저장</button>
+                                   <button class="btn btn-primary" type="reset"><i class="glyphicon glyphicon-repeat"></i> 리셋</button>
+                            </div>
+                      </div>
+                  </form>
+              
+              <hr>
+              
+             </div><!--/tab-pane-->
  
+          </div><!--/tab-content-->
+ 
+        </div><!--/col-9-->
+    </div><!--/row-->
+        
+    </article>
+     <!-- 내정보 수정 끝 -->
+
+     <!-- 인증하기 페이지 시작 -->
+     <article article class='certified' style="display: none;">
+        
+     </article>
+     <!-- 인증하기 페이지 끝 -->
 </section>
+<footer>
+
+</footer>
 
 </body>
 </html>

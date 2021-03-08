@@ -20,13 +20,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script><title>Document</title>
-<script type="text/javascript">   
-        $(document).ready( function() {
-            
-            $("header").load("../common/Header.html");  //nav 인클루드
-            $("footer").load("../common/Footer.html");  //nav 인클루드                       
-        });
-    </script>
+    <script type="text/javascript">
+	$(document).ready(function() {
+
+		 $("header").load("./Header.jsp");  //nav 인클루드
+         $("footer").load("./Footer.jsp");  //nav 인클루드
+
+	});
+</script>
     
     <script>
     $(function(){
@@ -48,6 +49,7 @@
 	                 console.log(responseObj);
 		              if(responseObj.mem_pwd!=null){
 		                   alert("비밀번호 : "+responseObj.mem_pwd);
+		                   location.href="./login.jsp";
 		              }else if(responseObj.status==-1){
 		                      alert("입력하신 정보를 다시 확인해주세요");
 		              }else if(responseObj.status==0){
