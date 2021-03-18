@@ -31,7 +31,7 @@ DB SQL도출             : 2월 1일 ~ 2월 5일
 프로젝트 완성            : 3월 8일
 
 
-사용할 언어 
+사용한 언어 
 1. Java
 2. Oracle
 3. HTML
@@ -39,5 +39,18 @@ DB SQL도출             : 2월 1일 ~ 2월 5일
 5. Javascript
 6. JSP
 
-해당 PPt를 참고하시면 이번 프로젝트 Together에 대한 자세한 사항이 들어있습니다.
-welcompage는 WebContent 안에 main.jsp입니다.
+
+역할 분배
+박아란
+ - 
+온수인 
+ - 로그인 기능 구현, 아이디/ 비밀번호 찾기 기능 구현, 마이페이지 기능 구현, 포인트 충전하기 기능 구현
+이소영
+ - 회원가입 기능 구현, TOGETEHR 인증샷 업로드 기능 구현, 개인정보 수정 기능 구현, 메인페이지 기능 구현 
+노성봉
+ - 
+김태영
+ - TOGETHER 결제 기능 구현, TOGETHER 인증샷 모아보기 기능 구현, TOGETHER인증샷 검색 및 좋아요 기능 구현, TOGETHER디테일 페이지 기능 구현, TOGETHER버전 생성기능 구현, TOGETHER 통합
+
+"210308_1조_TOGETHER.pptx"를 참고하시면 이번 프로젝트 Together프로젝트에 대한 자세한 사항이 들어있습니다.
+
